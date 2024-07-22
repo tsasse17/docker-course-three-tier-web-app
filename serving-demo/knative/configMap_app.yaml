@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config-knative
+  namespace: k8s-ns
+data:
+  API_HOST: "http://api-deployment-knative.k8s-ns.svc.cluster.local"
+

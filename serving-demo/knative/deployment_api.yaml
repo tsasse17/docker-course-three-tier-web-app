@@ -1,0 +1,38 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: api-deployment-knative
+  namespace: k8s-ns
+  labels:
+    networking.knative.dev/visibility: cluster-local
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - image: gitlabregistry.exxeta.com/gedeom.tsasse/serverlessk8s/api
+          ports:
+            - containerPort: 5001
+          env:
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: MYSQL_HOST
+            - name: MYSQL_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: MYSQL_DB
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MYSQL_PASSWORD
+
