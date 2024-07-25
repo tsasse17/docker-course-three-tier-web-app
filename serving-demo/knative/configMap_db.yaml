@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: k8s-ns
+data:
+  MYSQL_DB: "quotesdb"
+  MYSQL_HOST: "mysql"  
+
