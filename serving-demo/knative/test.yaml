@@ -1,0 +1,43 @@
+ apiVersion: serving.knative.dev/v1
+ kind: Route
+ metadata:
+   annotations:
+     serving.knative.dev/creator: minikube-user
+     serving.knative.dev/lastModifier: minikube-user
+   finalizers:
+     - routes.serving.knative.dev
+   labels:
+     serving.knative.dev/service: app-deployment-knative
+   name: app-deployment-knative
+   namespace: k8s-ns
+   ownerReferences:
+   - apiVersion: serving.knative.dev/v1
+     blockOwnerDeletion: true
+     controller: true
+     kind: Service
+     name: app-deployment-knative
+     uid: 7ce00189-d260-4e73-b4dd-533c876ea592
+ spec:
+   traffic:
+   - configurationName: app-deployment-knative
+     revisionName:
+     latestRevision: true
+     percent: 100
+   - configurationName: app-deployment-knative
+   -
+ status:
+   address:
+     url: http://app-deployment-knative.k8s-ns.svc.cluster.local
+   conditions:
+   - lastTransitionTime: "2024-07-26T09:45:36Z"
+     status: "True"
+     type: AllTrafficAssigned
+   - lastTransitionTime: "2024-07-26T09:45:36Z"
+     message: external-domain-tls is not enabled
+     reason: TLSNotEnabled
+     status: "True"
+     type: CertificateProvisioned
+   - lastTransitionTime: "2024-07-26T11:03:08Z"
+     status: "True"
+     type: IngressReady
+   - lastTransitionTime: "2024-07-26T11:03:08Z"

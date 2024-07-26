@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: knative-demo
+data:
+  MYSQL_DB: "db"
+  MYSQL_HOST: "mysql"  
+

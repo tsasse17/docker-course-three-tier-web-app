@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: xxx
+kind: Secret
+metadata:
+  name: gitlab-registry
+  namespace: knative-demo
+type: kubernetes.io/dockerconfigjson

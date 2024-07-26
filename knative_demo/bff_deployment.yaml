@@ -1,0 +1,19 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: bff-deployment
+  namespace: knative-demo
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - image: gitlabregistry.exxeta.com/gedeom.tsasse/serverlessk8s:bff
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: COM_EXXETA_USER_URL
+              value:  http://backend-deployment.knative-demo.svc.cluster.local/api/user
+

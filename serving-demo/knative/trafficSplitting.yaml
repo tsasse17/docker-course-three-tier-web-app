@@ -1,0 +1,11 @@
+apiVersion: serving.knative.dev/v1
+kind: Route
+metadata:
+  name: app-deployment-knative
+  namespace: k8s-ns
+spec:
+  traffic:
+     - revisionName: app-deployment-knative-00001
+       percent: 100
+     - revisionName: app-deployment-knative-00002
+       percent: 0
